@@ -1,0 +1,11 @@
+class Solution:
+    def repeatedSubstringPattern(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        if not s:
+            return False
+        
+        return s in (2 * s)[1:-1]
+        # 极其精妙的思路 → 针对字符串/数组周期性pattern重复的问题 考虑通过倍增原输入解决
