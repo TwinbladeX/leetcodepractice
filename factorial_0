@@ -1,0 +1,13 @@
+# LeetCode 172
+class Solution:
+    def trailingZeroes(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        count = 0
+        while n > 0:
+            n //= 5
+            count += n
+        return count
+# 一步步简化数学问题：0由2×5所得 → 统计所有乘数质因子中2×5对的组数 → 2总比5更多 → 仅需统计所有乘数质因子中5的个数
