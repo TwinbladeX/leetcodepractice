@@ -1,0 +1,40 @@
+# LeetCode 563
+# Binary Tree: recursion & traversal
+
+class Solution:
+    def findTilt(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        
+        # use of 'global' variable to record while recurring
+        self.tilt = 0
+
+        # in the form of postorder traversal
+        def sum_val(t):
+            if t is None:
+                return 0
+            left, right = sum_val(t.left), sum_val(t.right)
+            self.tilt += abs(left - right)
+            return t.val + left + right
+
+        sum_val(root)
+        return self.tilt
+        
+        
+class BadSolution:
+    def findTilt(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        def sum_val(t):
+            if t is None:
+                return 0
+            return t.val + sum_val(t.left) + sum_val(t.right)
+
+        if root is None:
+            return 0
+        return abs(sum_val(root.left) - sum_val(root.right)) + self.findTilt(root.left) + self.findTilt(root.right)
+        # repeated recursion -- try to avoid
