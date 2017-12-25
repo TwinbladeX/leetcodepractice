@@ -1,0 +1,39 @@
+# LeetCode 438
+# using Sliding Window Algorithm
+# 对于子字符串/子连续数列等问题，可以将其看作“滑动的窗户”，每次移动可只分析其头部减少的部分和尾部增加的部分，而无需检查全部
+# 使看似O(n * m)的复杂度降低至O(n)
+# see link below for advanced applications
+# https://discuss.leetcode.com/topic/68976/sliding-window-algorithm-template-to-solve-all-the-leetcode-substring-search-problem
+
+class Solution:
+    def findAnagrams(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: List[int]
+        """
+        table = {}
+        ans = []
+        for c in p:
+            table[c] = table.get(c, 0) + 1
+        for c in s[:len(p)]:
+            table[c] = table.get(c, 0) - 1
+            if table[c] == 0:
+                table.pop(c)
+        if not table:
+            ans.append(0)
+
+        for i in range(len(s) - len(p)):
+            head, tail = s[i], s[i + len(p)]
+            table[head] = table.get(head, 0) + 1
+            if table[head] == 0:
+                table.pop(head)
+            table[tail] = table.get(tail, 0) - 1
+            if table[tail] == 0:
+                table.pop(tail)
+            if not table:
+                ans.append(i + 1)
+        return ans
+
+
+print(Solution().findAnagrams("cbaebabacd", "abc"))
