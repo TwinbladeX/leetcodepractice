@@ -1,0 +1,30 @@
+# LeetCode 720
+# can be solved by using Trie
+# https://en.wikipedia.org/wiki/Trie
+# https://leetcode.com/problems/longest-word-in-dictionary/solution/
+
+class Solution:
+    def longestWord(self, words):
+        """
+        :type words: List[str]
+        :rtype: str
+        """
+        Trie = lambda: collections.defaultdict(Trie)
+        trie = Trie()
+        END = True
+
+        for i, word in enumerate(words):
+            reduce(dict.__getitem__, word, trie)[END] = i
+            # don't know what 'reduce' is
+
+        stack = trie.values()
+        ans = ""
+        while stack:
+            cur = stack.pop()
+            if END in cur:
+                word = words[cur[END]]
+                if len(word) > len(ans) or len(word) == len(ans) and word < ans:
+                    ans = word
+                stack.extend([cur[letter] for letter in cur if letter != END])
+
+        return ans
