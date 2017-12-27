@@ -1,0 +1,26 @@
+# LeetCode 141
+# detect linked list cycle by using 2 pointers with different 'speed'
+# imagine 2 runners on track -- the fast one will eventually catch up with the slow one
+# 1st pointer -- 1 step each turn, 2nd pointer -- 2 steps each turn
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def hasCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        if not head or not head.next:
+            return False
+        slow, fast = head, head.next.next
+        while slow is not fast:
+            if not fast or not fast.next:
+                return False
+            slow = slow.next
+            fast = fast.next.next
+        return True
