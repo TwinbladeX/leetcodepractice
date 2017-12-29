@@ -1,4 +1,5 @@
 # A summary of bit manipulation tricks
+# see also: https://leetcode.com/problems/sum-of-two-integers/discuss/84278/
 
 # LeetCode 342 -- check whether an integer is a power of 4
 # TRICK:
