@@ -17,4 +17,4 @@ class Solution:
 # LeetCode 136
 # TRICK:
 # using XOR  a ^ a = 0, a ^ 0 = a, a ^ b ^ a = (a ^ a) ^ b = b
-
+# can be used to find different bits between two numbers
